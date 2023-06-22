@@ -31,6 +31,11 @@
 
       console.log("Sent HTTP request to:", url);
     }
+
+    function startSendingRequests() {
+      var interval = document.getElementById("interval").value;
+      setInterval(sendHttpRequest, interval * 1000); // Convert interval to milliseconds
+    }
   </script>
 </head>
 <body>
@@ -47,6 +52,9 @@
     <option value="1">1 minute</option>
   </select><br>
 
-  <button onclick="sendHttpRequest()">Start</button>
+  <label for="interval">Interval between requests (in seconds):</label>
+  <input type="text" id="interval"><br>
+
+  <button onclick="startSendingRequests()">Start</button>
 </body>
 </html>
