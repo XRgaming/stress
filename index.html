@@ -6,15 +6,30 @@
     function sendHttpRequest() {
       var ip = document.getElementById("ip").value;
       var time = document.getElementById("time").value;
-      var successMessage = document.getElementById("successMessage");
 
-      // Perform any necessary validations before sending the request
-      
-      // Send the HTTP request
-      // You can replace this code with your actual HTTP request code
-      
-      // Display the success message
-      successMessage.innerHTML = "Successful request sent!";
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            // Request successful
+            var response = this.responseText;
+            if (response === "success") {
+              window.location.href = "success.php";
+            } else {
+              // Handle other response conditions if needed
+            }
+          } else {
+            // Request failed
+            // Handle error conditions if needed
+          }
+        }
+      };
+
+      var url = "stresser.php?ip=" + encodeURIComponent(ip) + "&time=" + encodeURIComponent(time);
+      xhttp.open("GET", url, true);
+      xhttp.send();
+
+      console.log("Sent HTTP request to:", url);
     }
   </script>
 </head>
@@ -33,7 +48,5 @@
   </select><br>
 
   <button onclick="sendHttpRequest()">Start</button>
-
-  <p id="successMessage"></p>
 </body>
 </html>
