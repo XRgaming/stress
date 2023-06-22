@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Network Stresser Kit</title>
+  <script>
+    function sendHttpRequest() {
+      var ip = document.getElementById("ip").value;
+      var time = document.getElementById("time").value;
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          window.location.href = "success.php";
+        }
+      };
+
+      var url = "stresser.php?ip=" + ip + "&time=" + time;
+      xhttp.open("GET", url, true);
+      xhttp.send();
+
+      console.log("Sent HTTP request to:", url);
+    }
+  </script>
+</head>
+<body>
+  <h1>Network Stresser Kit</h1>
+
+  <label for="ip">Destination IP:</label>
+  <input type="text" id="ip"><br>
+
+  <label for="time">Time (in minutes):</label>
+  <select id="time">
+    <option value="60">1 hour</option>
+    <option value="120">2 hours</option>
+    <option value="30">30 minutes</option>
+    <option value="1">1 minute</option>
+  </select><br>
+
+  <button onclick="sendHttpRequest()">Start</button>
+</body>
+</html>
