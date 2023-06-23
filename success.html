@@ -1,31 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Successful requests</title>
-  <script>
-    var stopRequest = false;
-
-    function sendHttpRequest() {
-      if (stopRequest) {
-        console.log("Requests stopped.");
-        return;
-      }
-
-      // Your existing code to send HTTP requests here
-
-      setTimeout(sendHttpRequest, 1); // Send request every 1 second
-    }
-
-    function stopHttpRequest() {
-      stopRequest = true;
-      console.log("Requests stopped.");
-    }
-  </script>
+  <title>Successful Request</title>
 </head>
 <body>
   <h1>Request Successful!</h1>
-  <p>Your stress test request has been successfully sent and processed press the "Stop" Button to stop the requests.</p>
-  <button onclick="stopHttpRequest()">Stop</button>
+  <p>Your stress test request has been successfully sent and processed.</p>
   <!-- Add any additional content or styling as needed -->
 </body>
 </html>
