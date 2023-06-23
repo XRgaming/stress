@@ -3,6 +3,8 @@
 <head>
   <title>Network Stresser Kit</title>
   <script>
+    var stopRequest = false;
+
     function sendHttpRequest() {
       var ip = document.getElementById("ip").value;
       var time = document.getElementById("time").value;
@@ -11,15 +13,13 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState === 4) {
           if (this.status === 200) {
-            // Request successful
             var response = this.responseText;
             if (response === "success") {
-              window.location.href = "success.html"; // Redirect to success.html
+              window.location.href = "success.html";
             } else {
               // Handle other response conditions if needed
             }
           } else {
-            // Request failed
             // Handle error conditions if needed
           }
         }
@@ -30,11 +30,14 @@
       xhttp.send();
 
       console.log("Sent HTTP request to:", url);
+
+      if (!stopRequest) {
+        setTimeout(sendHttpRequest, 1000); // Send request every 1 second
+      }
     }
 
-    function startSendingRequests() {
-      var interval = document.getElementById("interval").value;
-      setInterval(sendHttpRequest, interval * 1); // Convert interval to milliseconds
+    function stopHttpRequest() {
+      stopRequest = true;
     }
   </script>
 </head>
@@ -52,9 +55,7 @@
     <option value="1">1 minute</option>
   </select><br>
 
-  <label for="interval">Interval between requests (in seconds):</label>
-  <input type="text" id="interval"><br>
-
-  <button onclick="startSendingRequests()">Start</button>
+  <button onclick="sendHttpRequest()">Start</button>
+  <button onclick="stopHttpRequest()">Stop</button>
 </body>
 </html>
