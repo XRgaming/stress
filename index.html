@@ -15,7 +15,9 @@
           if (this.status === 200) {
             var response = this.responseText;
             if (response === "success") {
-              window.location.href = "success.html";
+              document.getElementById("status").innerHTML = "Your request was successful!";
+              document.getElementById("status").style.color = "green";
+              document.getElementById("stopButton").style.display = "none";
             } else {
               // Handle other response conditions if needed
             }
@@ -38,6 +40,8 @@
 
     function stopHttpRequest() {
       stopRequest = true;
+      document.getElementById("status").innerHTML = "Request Stopped!";
+      document.getElementById("status").style.color = "red";
     }
   </script>
 </head>
@@ -56,6 +60,8 @@
   </select><br>
 
   <button onclick="sendHttpRequest()">Start</button>
-  <button onclick="stopHttpRequest()">Stop</button>
+  <button id="stopButton" onclick="stopHttpRequest()">Stop</button>
+
+  <p id="status"></p>
 </body>
 </html>
